@@ -1,0 +1,14 @@
+{
+    "name": "build",
+    "private": true,
+    "version": "1.0.0",
+    "main": "exports.js",
+    "type": "module",
+    "devDependencies": {
+        "@occult-app/blank-lib": "file:..",
+        "esbuild": "0.20.1"
+    },
+    "scripts": {
+        "build:release": "npx esbuild --bundle exports.js --outfile=occult-app-blank-lib.js --global-name=occultAppBlankLib"
+    }
+}
