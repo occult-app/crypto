@@ -6,7 +6,10 @@
     "declaration": true,
     "declarationMap": true,
     "target": "es2020",
-    "lib": ["es2020"],
+    "lib": [
+      "es2020",
+      "dom"
+    ],
     "strict": true,
     "sourceMap": true,
     "allowSyntheticDefaultImports": false,
@@ -17,7 +20,7 @@
     "noUncheckedIndexedAccess": false,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "baseUrl": ".",
+    "baseUrl": "."
   },
   "include": ["src"],
   "exclude": ["node_modules"]
