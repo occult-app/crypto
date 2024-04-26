@@ -1,6 +1,6 @@
 {
     "preset": "ts-jest",
-    "testEnvironment": "node",
+    "testEnvironment": "jest-environment-jsdom",
     "roots": ["<rootDir>/tests"],
     "testMatch": ["**/*.spec.ts"],
     "moduleNameMapper": {
