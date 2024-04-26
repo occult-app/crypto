@@ -5,10 +5,10 @@
     "main": "exports.js",
     "type": "module",
     "devDependencies": {
-        "@occult-app/blank-lib": "file:..",
+        "@occult-app/crypto": "file:..",
         "esbuild": "0.20.1"
     },
     "scripts": {
-        "build:release": "npx esbuild --bundle exports.js --outfile=occult-app-blank-lib.js --global-name=occultAppBlankLib"
+        "build:release": "npx esbuild --bundle exports.js --outfile=occult-app-crypto.js --global-name=occultAppCrypto"
     }
 }

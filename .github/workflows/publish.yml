@@ -60,6 +60,6 @@ jobs:
           npm run build:release
           cd ..
       - name: Publish release
-        run: gh release upload ${{ github.event.release.tag_name }} build/occult-app-blank-lib.js
+        run: gh release upload ${{ github.event.release.tag_name }} build/occult-app-crypto.js
         env:
           GH_TOKEN: ${{ github.token }}

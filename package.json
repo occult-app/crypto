@@ -1,7 +1,7 @@
 {
-    "name": "@occult-app/blank-lib",
-    "version": "1.0.2",
-    "description": "Blank library",
+    "name": "@occult-app/crypto",
+    "version": "0.0.1",
+    "description": "Occult Crypto Library",
     "scripts": {
         "build": "npm run build:clean; tsc -p tsconfig.json",
         "build:clean": "rm *.{js,d.ts,js.map,d.ts.map} 2> /dev/null",
@@ -19,14 +19,11 @@
     ],
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/occult-app/blank-lib.git"
+        "url": "git+https://github.com/occult-app/crypto.git"
     },
     "author": "Occult Team",
     "license": "GPL-3.0-or-later",
-    "bugs": {
-        "url": "https://github.com/occult-app/blank-lib/issues"
-    },
-    "homepage": "https://github.com/occult-app/blank-lib#readme",
+    "homepage": "https://github.com/occult-app/crypto#readme",
     "devDependencies": {
         "@commitlint/cli": "^19.3.0",
         "@commitlint/config-conventional": "^19.2.2",
