@@ -11,3 +11,4 @@ import {
     hexToBase64
 } from "./types";
 import { randomBytes } from "./random";
+import { sha256, sha512 } from "./sha2";
