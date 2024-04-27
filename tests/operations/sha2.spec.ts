@@ -2,7 +2,7 @@ import { ByteArray, bytesToHex } from "../../src/types";
 import { sha256, sha512 } from "../../src/operations/sha2";
 
 describe("SHA2", () => {
-    const input: string = "hash me!";
+    const input: ByteArray = new TextEncoder().encode("hash me!");
 
     it("should compute the SHA-256 hash", async () => {
         const hash: ByteArray = await sha256(input);

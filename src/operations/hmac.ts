@@ -1,4 +1,3 @@
-import { subtle } from "crypto";
 import { ByteArray } from "../types";
 
 /**
@@ -9,7 +8,7 @@ import { ByteArray } from "../types";
  * @returns The computed tag.
  */
 async function hmac(key: ByteArray, input: ByteArray): Promise<ByteArray> {
-    const importedKey = await subtle.importKey(
+    const importedKey = await window.crypto.subtle.importKey(
         "raw",
         key,
         { name: "HMAC", hash: "SHA-256" },
@@ -17,7 +16,7 @@ async function hmac(key: ByteArray, input: ByteArray): Promise<ByteArray> {
         ["sign"]
     );
 
-    const tag = await subtle.sign("HMAC", importedKey, input);
+    const tag = await window.crypto.subtle.sign("HMAC", importedKey, input);
 
     return new Uint8Array(tag);
 }
