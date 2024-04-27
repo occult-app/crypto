@@ -11,7 +11,7 @@ interface KeyPair {
  *
  * @returns A Ed25519 key pair.
  */
-function generateKeyPair(): KeyPair {
+function generateEd25519KeyPair(): KeyPair {
     const secret: ByteArray = ed25519.utils.randomPrivateKey();
     return {
         pub: ed25519.getPublicKey(secret),
@@ -42,4 +42,4 @@ function verify(pub: ByteArray, signature: ByteArray, data: ByteArray): boolean 
     return ed25519.verify(signature, data, pub);
 }
 
-export { generateKeyPair, sign, verify };
+export { generateEd25519KeyPair, sign, verify };
