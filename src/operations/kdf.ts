@@ -1,5 +1,5 @@
 import { subtle } from "crypto";
-import { ByteArray } from "./types";
+import { ByteArray } from "../types";
 
 interface KDFContext {
     info: string;

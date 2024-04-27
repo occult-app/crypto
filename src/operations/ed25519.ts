@@ -1,4 +1,4 @@
-import { ByteArray } from "./types";
+import { ByteArray } from "../types";
 import { ed25519 } from "@noble/curves/ed25519";
 
 interface KeyPair {

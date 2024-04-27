@@ -1,5 +1,5 @@
 import { subtle } from "crypto";
-import { ByteArray } from "./types";
+import { ByteArray } from "../types";
 
 /**
  * Computes the HMAC-SHA256 tag (hash) of the input data using the provided key.

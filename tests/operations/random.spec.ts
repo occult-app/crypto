@@ -1,5 +1,5 @@
-import { randomBytes } from "../src/random";
-import { ByteArray } from "../src/types";
+import { randomBytes } from "../../src/operations/random";
+import { ByteArray } from "../../src/types";
 
 describe("CSPRNG", () => {
     it("should return a random number", async () => {

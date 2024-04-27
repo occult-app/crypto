@@ -1,5 +1,5 @@
-import { ppf } from "../src/ppf";
-import { ByteArray, bytesToHex } from "../src/types";
+import { ppf } from "../../src/operations/ppf";
+import { ByteArray, bytesToHex } from "../../src/types";
 
 describe("Password Processing Function", () => {
     const password: string = "SuperS3cret!";

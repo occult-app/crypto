@@ -1,4 +1,4 @@
-import { ByteArray } from "./types";
+import { ByteArray } from "../types";
 import { createHash, Hash } from "crypto";
 
 type Algorithm = "SHA-256" | "SHA-512";
