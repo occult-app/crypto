@@ -1,4 +1,3 @@
-import { subtle } from "crypto";
 import { ByteArray } from "../types";
 
 interface KDFContext {
@@ -28,7 +27,7 @@ async function kdf(
     outputLength: number,
     salt: ByteArray | null = null
 ): Promise<ByteArray> {
-    const extractKey = await subtle.importKey("raw", key, { name: "HKDF" }, false, [
+    const extractKey = await window.crypto.subtle.importKey("raw", key, { name: "HKDF" }, false, [
         "deriveKey",
         "deriveBits"
     ]);
@@ -36,7 +35,7 @@ async function kdf(
     const contextBuffer = contextToBuffer(context);
     const saltBuffer = Buffer.from(salt ?? []);
 
-    const derived = await subtle.deriveBits(
+    const derived = await window.crypto.subtle.deriveBits(
         {
             name: "HKDF",
             info: contextBuffer,

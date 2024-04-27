@@ -1,4 +1,3 @@
-import { subtle } from "crypto";
 import { ByteArray, bytesToBase64 } from "../types";
 import DecryptionException from "../exceptions/DecryptionException";
 
@@ -13,7 +12,7 @@ interface KeyPair {
  * @returns An RSA key pair.
  */
 async function generateRSAKeyPair(): Promise<KeyPair> {
-    const cryptoKeyPair = await subtle.generateKey(
+    const cryptoKeyPair = await window.crypto.subtle.generateKey(
         {
             name: "RSA-OAEP",
             modulusLength: 2048,
@@ -24,9 +23,11 @@ async function generateRSAKeyPair(): Promise<KeyPair> {
         ["encrypt", "decrypt"]
     );
 
-    const pub: ByteArray = new Uint8Array(await subtle.exportKey("spki", cryptoKeyPair.publicKey));
+    const pub: ByteArray = new Uint8Array(
+        await window.crypto.subtle.exportKey("spki", cryptoKeyPair.publicKey)
+    );
     const secret: ByteArray = new Uint8Array(
-        await subtle.exportKey("pkcs8", cryptoKeyPair.privateKey)
+        await window.crypto.subtle.exportKey("pkcs8", cryptoKeyPair.privateKey)
     );
 
     return { pub, secret };
@@ -52,7 +53,7 @@ function exportAsPem(key: ByteArray, keyType: "PUBLIC" | "SECRET"): string {
  * @returns The encrypted data.
  */
 async function rsaEncrypt(pub: ByteArray, data: ByteArray): Promise<ByteArray> {
-    const publicKey = await subtle.importKey(
+    const publicKey = await window.crypto.subtle.importKey(
         "spki",
         pub,
         { name: "RSA-OAEP", hash: "SHA-256" },
@@ -60,7 +61,7 @@ async function rsaEncrypt(pub: ByteArray, data: ByteArray): Promise<ByteArray> {
         ["encrypt"]
     );
 
-    const encryptedData = await subtle.encrypt({ name: "RSA-OAEP" }, publicKey, data);
+    const encryptedData = await window.crypto.subtle.encrypt({ name: "RSA-OAEP" }, publicKey, data);
 
     return new Uint8Array(encryptedData);
 }
@@ -74,7 +75,7 @@ async function rsaEncrypt(pub: ByteArray, data: ByteArray): Promise<ByteArray> {
  */
 async function rsaDecrypt(secret: ByteArray, cipher: ByteArray): Promise<ByteArray> {
     try {
-        const privateKey = await subtle.importKey(
+        const privateKey = await window.crypto.subtle.importKey(
             "pkcs8",
             secret,
             { name: "RSA-OAEP", hash: "SHA-256" },
@@ -82,7 +83,11 @@ async function rsaDecrypt(secret: ByteArray, cipher: ByteArray): Promise<ByteArr
             ["decrypt"]
         );
 
-        const decryptedData = await subtle.decrypt({ name: "RSA-OAEP" }, privateKey, cipher);
+        const decryptedData = await window.crypto.subtle.decrypt(
+            { name: "RSA-OAEP" },
+            privateKey,
+            cipher
+        );
 
         return new Uint8Array(decryptedData);
     } catch (error) {
