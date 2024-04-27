@@ -25,6 +25,7 @@
     "license": "GPL-3.0-or-later",
     "homepage": "https://github.com/occult-app/crypto#readme",
     "dependencies": {
+        "@noble/curves": "1.4.0",
         "@noble/hashes": "1.4.0"
     },
     "devDependencies": {
