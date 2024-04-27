@@ -1,5 +1,5 @@
 import { ByteArray, hexToBytes } from "../src/types";
-import { generateKeyPair, sign, verify } from "../src/ed25519";
+import { generateEd25519KeyPair, sign, verify } from "../src/ed25519";
 
 describe("Ed25519", () => {
     const secret: ByteArray = hexToBytes(
@@ -14,7 +14,7 @@ describe("Ed25519", () => {
     );
 
     it("should generate a key pair", () => {
-        const keyPair = generateKeyPair();
+        const keyPair = generateEd25519KeyPair();
 
         expect(keyPair.secret.length).toBe(32);
         expect(keyPair.pub.length).toBe(32);

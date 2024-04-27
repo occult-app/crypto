@@ -15,4 +15,5 @@ import { sha256, sha512 } from "./sha2";
 import { kdf } from "./kdf";
 import { ppf } from "./ppf";
 import { hmac } from "./hmac";
-import { generateKeyPair, sign, verify } from "./ed25519";
+import { generateEd25519KeyPair, sign, verify } from "./ed25519";
+import { generateRSAKeyPair, exportAsPem, rsaEncrypt, rsaDecrypt } from "./rsa";
