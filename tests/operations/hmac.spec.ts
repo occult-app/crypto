@@ -1,5 +1,5 @@
-import { ByteArray, bytesToHex, hexToBytes } from "../src/types";
-import { hmac } from "../src/hmac";
+import { ByteArray, bytesToHex, hexToBytes } from "../../src/types";
+import { hmac } from "../../src/operations/hmac";
 
 describe("HMAC", () => {
     it("should compute the HMAC-SHA256 hash", async () => {

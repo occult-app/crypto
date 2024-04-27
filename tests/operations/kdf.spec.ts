@@ -1,5 +1,5 @@
-import { ByteArray, bytesToHex } from "../src/types";
-import { kdf } from "../src/kdf";
+import { ByteArray, bytesToHex } from "../../src/types";
+import { kdf } from "../../src/operations/kdf";
 
 describe("KDF", () => {
     const key: ByteArray = new Uint8Array([

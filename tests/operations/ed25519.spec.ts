@@ -1,5 +1,5 @@
-import { ByteArray, hexToBytes } from "../src/types";
-import { generateEd25519KeyPair, sign, verify } from "../src/ed25519";
+import { ByteArray, hexToBytes } from "../../src/types";
+import { generateEd25519KeyPair, sign, verify } from "../../src/operations/ed25519";
 
 describe("Ed25519", () => {
     const secret: ByteArray = hexToBytes(

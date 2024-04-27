@@ -1,6 +1,6 @@
 import { subtle } from "crypto";
-import { ByteArray, bytesToBase64 } from "./types";
-import DecryptionException from "./exceptions/DecryptionException";
+import { ByteArray, bytesToBase64 } from "../types";
+import DecryptionException from "../exceptions/DecryptionException";
 
 interface KeyPair {
     pub: ByteArray;

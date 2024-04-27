@@ -1,6 +1,6 @@
-import { exportAsPem, generateRSAKeyPair, rsaDecrypt, rsaEncrypt } from "../src/rsa";
-import { base64ToBytes, ByteArray } from "../src/types";
-import DecryptionException from "../src/exceptions/DecryptionException";
+import { exportAsPem, generateRSAKeyPair, rsaDecrypt, rsaEncrypt } from "../../src/operations/rsa";
+import { base64ToBytes, ByteArray } from "../../src/types";
+import DecryptionException from "../../src/exceptions/DecryptionException";
 
 describe("RSA", () => {
     const pub: ByteArray = base64ToBytes(

@@ -1,4 +1,4 @@
-import { ByteArray } from "./types";
+import { ByteArray } from "../types";
 import { argon2id } from "@noble/hashes/argon2";
 
 const ARGON2ID_ITERATION_COUNT: number = 3;

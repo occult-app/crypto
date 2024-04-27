@@ -1,4 +1,4 @@
-import { ByteArray } from "./types";
+import { ByteArray } from "../types";
 
 /**
  * Generates cryptographically secure random bytes using the Web Crypto API.
