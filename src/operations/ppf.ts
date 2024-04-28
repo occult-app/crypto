@@ -8,10 +8,10 @@ const ARGON2ID_PARALLELISM: number = 2;
 /**
  * Password Processing Function : Derives a password using Argon2id.
  *
- * @param password The password to derive.
- * @param salt PPF salt
- * @param outputLength The length of the output key in bytes.
- * @returns The derived key.
+ * @param {string} password The password to derive.
+ * @param {ByteArray} salt PPF salt
+ * @param {number} outputLength The length of the output key in bytes.
+ * @returns {ByteArray} The derived key.
  */
 function ppf(password: string, salt: ByteArray, outputLength: number = 32): ByteArray {
     return argon2id(password, salt, {

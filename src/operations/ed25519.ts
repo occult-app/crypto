@@ -9,7 +9,7 @@ interface KeyPair {
 /**
  * Generates a pair of Ed25519 keys.
  *
- * @returns A Ed25519 key pair.
+ * @returns {KeyPair} A Ed25519 key pair.
  */
 function generateEd25519KeyPair(): KeyPair {
     const secret: ByteArray = ed25519.utils.randomPrivateKey();
@@ -22,9 +22,9 @@ function generateEd25519KeyPair(): KeyPair {
 /**
  * Signs the provided data using the given secret key.
  *
- * @param secret The secret key used for signing.
- * @param data The data to be signed.
- * @returns The signature of the data.
+ * @param {ByteArray} secret The secret key used for signing.
+ * @param {ByteArray} data The data to be signed.
+ * @returns {ByteArray} The signature of the data.
  */
 function sign(secret: ByteArray, data: ByteArray): ByteArray {
     return ed25519.sign(data, secret);
@@ -33,10 +33,10 @@ function sign(secret: ByteArray, data: ByteArray): ByteArray {
 /**
  * Verifies the signature of the provided data using the given public key.
  *
- * @param pub The public key used for verification.
- * @param signature The signature to be verified.
- * @param data The data whose signature is to be verified.
- * @returns A boolean indicating whether the signature is valid.
+ * @param {ByteArray} pub The public key used for verification.
+ * @param {ByteArray} signature The signature to be verified.
+ * @param {ByteArray} data The data whose signature is to be verified.
+ * @returns {boolean} A boolean indicating whether the signature is valid.
  */
 function verify(pub: ByteArray, signature: ByteArray, data: ByteArray): boolean {
     return ed25519.verify(signature, data, pub);
