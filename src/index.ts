@@ -8,7 +8,8 @@ import {
     bytesToBase64,
     base64ToBytes,
     base64ToHex,
-    hexToBase64
+    hexToBase64,
+    concatBytes
 } from "./types";
 import { randomBytes } from "./operations/random";
 import { sha256, sha512 } from "./operations/sha2";
@@ -17,3 +18,4 @@ import { ppf } from "./operations/ppf";
 import { hmac } from "./operations/hmac";
 import { generateEd25519KeyPair, sign, verify } from "./operations/ed25519";
 import { generateRSAKeyPair, exportAsPem, rsaEncrypt, rsaDecrypt } from "./operations/rsa";
+import { aesEncrypt, aesDecrypt } from "./operations/aes";

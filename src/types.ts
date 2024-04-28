@@ -26,6 +26,13 @@ function hexToBase64(hex: Hex): Base64 {
     return bytesToBase64(hexToBytes(hex));
 }
 
+function concatBytes(a: ByteArray, b: ByteArray): ByteArray {
+    const result = new Uint8Array(a.length + b.length);
+    result.set(a, 0);
+    result.set(b, a.length);
+    return result;
+}
+
 export {
     ByteArray,
     Hex,
@@ -35,5 +42,6 @@ export {
     bytesToBase64,
     base64ToBytes,
     base64ToHex,
-    hexToBase64
+    hexToBase64,
+    concatBytes
 };
