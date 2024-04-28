@@ -4,7 +4,7 @@
     "description": "Occult Crypto Library",
     "scripts": {
         "build": "npm run build:clean; tsc -p tsconfig.json",
-        "build:clean": "rm *.{js,d.ts,js.map,d.ts.map} 2> /dev/null",
+        "build:clean": "find . \\( -name '*.js' -o -name '*.d.ts' -o -name '*.js.map' -o -name '*.d.ts.map' \\) ! -path './node_modules/*' ! -path './build/exports.js' -exec rm {} + && find . -type d -empty -delete",
         "lint": "prettier --check 'src/**/*.{js,ts}' 'tests/**/*.{js,ts}'",
         "format": "prettier --write 'src/**/*.{js,ts}' 'tests/**/*.{js,ts}'",
         "test": "jest --coverage",
