@@ -15,11 +15,11 @@ function contextToBuffer(context: KDFContext): Buffer {
 /**
  * Performs HKDF (HMAC-based Key Derivation Function)
  *
- * @param key The input key material.
- * @param context The HKDF context containing information such as info string and version.
- * @param outputLength The length of the output key material in bytes.
- * @param salt (Optional) Salt to use during key extraction.
- * @returns The derived key material.
+ * @param {ByteArray} key The input key material.
+ * @param {KDFContext} context The HKDF context containing information such as info string and version.
+ * @param {number} outputLength The length of the output key material in bytes.
+ * @param {ByteArray | null} salt (Optional) Salt to use during key extraction.
+ * @returns {Promise<ByteArray>} The derived key material.
  */
 async function kdf(
     key: ByteArray,

@@ -4,10 +4,10 @@ import DecryptionException from "../exceptions/DecryptionException";
 /**
  * Encrypts the given data using AES-GCM.
  *
- * @param key The encryption key.
- * @param iv The initialisation vector.
- * @param data The data to be encrypted.
- * @returns The encrypted data.
+ * @param {ByteArray} key The encryption key.
+ * @param {ByteArray} iv The initialisation vector.
+ * @param {ByteArray} data The data to be encrypted.
+ * @returns {Promise<ByteArray>} The encrypted data.
  */
 async function aesEncrypt(key: ByteArray, iv: ByteArray, data: ByteArray): Promise<ByteArray> {
     const cryptoKey = await window.crypto.subtle.importKey("raw", key, { name: "AES-GCM" }, false, [
@@ -25,10 +25,11 @@ async function aesEncrypt(key: ByteArray, iv: ByteArray, data: ByteArray): Promi
 /**
  * Decrypts the given cipher using AES-GCM.
  *
- * @param key The encryption key.
- * @param iv The initialisation vector.
- * @param cipher The ciphered data to be decrypted.
- * @returns The decrypted data.
+ * @param {ByteArray} key The encryption key.
+ * @param {ByteArray} iv The initialisation vector.
+ * @param {ByteArray} cipher The ciphered data to be decrypted.
+ * @returns {Promise<ByteArray>} The decrypted data.
+ * @throws {DecryptionException} Throws DecryptionException if data cannot be decrypted.
  */
 async function aesDecrypt(key: ByteArray, iv: ByteArray, cipher: ByteArray): Promise<ByteArray> {
     try {
