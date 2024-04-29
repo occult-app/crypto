@@ -1,4 +1,5 @@
-import { hexToBytes as nobleHexToBytes, bytesToHex as nobleBytesToHex } from "@noble/hashes/utils";
+import { bytesToHex as nobleBytesToHex, hexToBytes as nobleHexToBytes } from "@noble/hashes/utils";
+import InvalidArgumentException from "./exceptions/InvalidArgumentException";
 
 type ByteArray = Uint8Array;
 type Hex = string;
@@ -13,6 +14,7 @@ type Base64 = string;
 function bytesToHex(bytes: ByteArray): Hex {
     return nobleBytesToHex(bytes);
 }
+
 /**
  * Converts a Hex string to a ByteArray
  *
@@ -32,6 +34,7 @@ function hexToBytes(hex: Hex): ByteArray {
 function bytesToBase64(bytes: ByteArray): Base64 {
     return Buffer.from(bytes).toString("base64");
 }
+
 /**
  * Converts a Base64 string to a ByteArray
  *
@@ -51,6 +54,7 @@ function base64ToBytes(base64: Base64): ByteArray {
 function base64ToHex(base64: Base64): Hex {
     return bytesToHex(base64ToBytes(base64));
 }
+
 /**
  * Converts a Hex string to a Base64 string
  *
@@ -75,6 +79,38 @@ function concatBytes(a: ByteArray, b: ByteArray): ByteArray {
     return result;
 }
 
+function checkNumber(...n: unknown[]): void {
+    n.forEach((_n) => {
+        if (!Number.isSafeInteger(_n)) {
+            throw new InvalidArgumentException("number", _n);
+        }
+    });
+}
+
+function checkPositiveInteger(...n: unknown[]): void {
+    n.forEach((_n) => {
+        checkNumber(_n);
+        if ((_n as number) < 0) {
+            throw new InvalidArgumentException("positive integer", _n);
+        }
+    });
+}
+
+function checkBytes(...bytes: unknown[]): void {
+    bytes.forEach((_bytes) => {
+        if (
+            !(_bytes instanceof Uint8Array) &&
+            !(
+                _bytes !== null &&
+                typeof _bytes === "object" &&
+                _bytes.constructor.name === "Uint8Array"
+            )
+        ) {
+            throw new InvalidArgumentException("byte array", _bytes);
+        }
+    });
+}
+
 export {
     ByteArray,
     Hex,
@@ -85,5 +121,8 @@ export {
     base64ToBytes,
     base64ToHex,
     hexToBase64,
-    concatBytes
+    concatBytes,
+    checkNumber,
+    checkPositiveInteger,
+    checkBytes
 };

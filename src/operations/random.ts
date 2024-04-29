@@ -1,4 +1,4 @@
-import { ByteArray } from "../types";
+import { ByteArray, checkPositiveInteger } from "../types";
 
 /**
  * Generates cryptographically secure random bytes using the Web Crypto API.
@@ -7,6 +7,8 @@ import { ByteArray } from "../types";
  * @returns {Promise<ByteArray>} ByteArray containing the generated random bytes.
  */
 async function randomBytes(length: number): Promise<ByteArray> {
+    checkPositiveInteger(length);
+
     return crypto.getRandomValues(new Uint8Array(length));
 }
 

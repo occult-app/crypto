@@ -1,4 +1,4 @@
-import { ByteArray } from "../types";
+import { ByteArray, checkBytes, checkNumber, checkPositiveInteger } from "../types";
 
 interface KDFContext {
     info: string;
@@ -6,6 +6,8 @@ interface KDFContext {
 }
 
 function contextToBuffer(context: KDFContext): Buffer {
+    checkNumber(context.version);
+
     const infoBuffer: Buffer = Buffer.from(context.info);
     const versionBuffer: Buffer = Buffer.alloc(1);
     versionBuffer.writeUInt8(context.version);
@@ -27,6 +29,10 @@ async function kdf(
     outputLength: number,
     salt: ByteArray | null = null
 ): Promise<ByteArray> {
+    checkBytes(key);
+    if (salt) checkBytes(salt);
+    checkPositiveInteger(context.version, outputLength);
+
     const extractKey = await window.crypto.subtle.importKey("raw", key, { name: "HKDF" }, false, [
         "deriveKey",
         "deriveBits"

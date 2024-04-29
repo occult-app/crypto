@@ -1,4 +1,4 @@
-import { ByteArray } from "../types";
+import { ByteArray, checkBytes } from "../types";
 import DecryptionException from "../exceptions/DecryptionException";
 
 /**
@@ -10,6 +10,8 @@ import DecryptionException from "../exceptions/DecryptionException";
  * @returns {Promise<ByteArray>} The encrypted data.
  */
 async function aesEncrypt(key: ByteArray, iv: ByteArray, data: ByteArray): Promise<ByteArray> {
+    checkBytes(key, iv, data);
+
     const cryptoKey = await window.crypto.subtle.importKey("raw", key, { name: "AES-GCM" }, false, [
         "encrypt"
     ]);
@@ -32,6 +34,8 @@ async function aesEncrypt(key: ByteArray, iv: ByteArray, data: ByteArray): Promi
  * @throws {DecryptionException} Throws DecryptionException if data cannot be decrypted.
  */
 async function aesDecrypt(key: ByteArray, iv: ByteArray, cipher: ByteArray): Promise<ByteArray> {
+    checkBytes(key, iv, cipher);
+
     try {
         const cryptoKey = await window.crypto.subtle.importKey(
             "raw",

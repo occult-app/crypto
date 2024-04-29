@@ -1,4 +1,4 @@
-import { ByteArray } from "../types";
+import { ByteArray, checkBytes } from "../types";
 import { ed25519 } from "@noble/curves/ed25519";
 
 interface KeyPair {
@@ -27,6 +27,8 @@ function generateEd25519KeyPair(): KeyPair {
  * @returns {ByteArray} The signature of the data.
  */
 function sign(secret: ByteArray, data: ByteArray): ByteArray {
+    checkBytes(secret, data);
+
     return ed25519.sign(data, secret);
 }
 
@@ -39,6 +41,8 @@ function sign(secret: ByteArray, data: ByteArray): ByteArray {
  * @returns {boolean} A boolean indicating whether the signature is valid.
  */
 function verify(pub: ByteArray, signature: ByteArray, data: ByteArray): boolean {
+    checkBytes(pub, signature, data);
+
     return ed25519.verify(signature, data, pub);
 }
 

@@ -1,8 +1,10 @@
-import { ByteArray } from "../types";
+import { ByteArray, checkBytes } from "../types";
 
 type Algorithm = "SHA-256" | "SHA-512";
 
 async function sha2(input: ByteArray, algorithm: Algorithm): Promise<ByteArray> {
+    checkBytes(input);
+
     return new Uint8Array(await window.crypto.subtle.digest(algorithm, input));
 }
 

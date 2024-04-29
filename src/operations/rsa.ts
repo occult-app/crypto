@@ -1,4 +1,4 @@
-import { ByteArray, bytesToBase64 } from "../types";
+import { ByteArray, bytesToBase64, checkBytes } from "../types";
 import DecryptionException from "../exceptions/DecryptionException";
 
 interface KeyPair {
@@ -41,6 +41,8 @@ async function generateRSAKeyPair(): Promise<KeyPair> {
  * @returns {string} The RSA key in PEM format.
  */
 function exportAsPem(key: ByteArray, keyType: "PUBLIC" | "SECRET"): string {
+    checkBytes(key);
+
     const base64Key = bytesToBase64(new Uint8Array(key));
     return `-----BEGIN ${keyType == "PUBLIC" ? "PUBLIC" : "RSA PRIVATE"} KEY-----\n${base64Key}\n-----END ${keyType == "PUBLIC" ? "PUBLIC" : "RSA PRIVATE"} KEY-----`;
 }
@@ -53,6 +55,8 @@ function exportAsPem(key: ByteArray, keyType: "PUBLIC" | "SECRET"): string {
  * @returns {Promise<ByteArray>} The encrypted data.
  */
 async function rsaEncrypt(pub: ByteArray, data: ByteArray): Promise<ByteArray> {
+    checkBytes(pub, data);
+
     const publicKey = await window.crypto.subtle.importKey(
         "spki",
         pub,
@@ -75,6 +79,8 @@ async function rsaEncrypt(pub: ByteArray, data: ByteArray): Promise<ByteArray> {
  * @throws {DecryptionException} Throws DecryptionException if data cannot be decrypted.
  */
 async function rsaDecrypt(secret: ByteArray, cipher: ByteArray): Promise<ByteArray> {
+    checkBytes(secret, cipher);
+
     try {
         const privateKey = await window.crypto.subtle.importKey(
             "pkcs8",
