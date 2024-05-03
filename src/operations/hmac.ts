@@ -1,4 +1,4 @@
-import { ByteArray } from "../types";
+import { ByteArray, checkBytes } from "../types";
 
 /**
  * Computes the HMAC-SHA256 tag (hash) of the input data using the provided key.
@@ -8,6 +8,8 @@ import { ByteArray } from "../types";
  * @returns {Promise<ByteArray>} The computed tag.
  */
 async function hmac(key: ByteArray, input: ByteArray): Promise<ByteArray> {
+    checkBytes(key, input);
+
     const importedKey = await window.crypto.subtle.importKey(
         "raw",
         key,

@@ -5,10 +5,15 @@ import {
     ByteArray,
     bytesToBase64,
     bytesToHex,
+    checkBytes,
+    checkNumber,
+    checkPositiveInteger,
+    concatBytes,
     Hex,
     hexToBase64,
     hexToBytes
 } from "../src/types";
+import InvalidArgumentException from "../src/exceptions/InvalidArgumentException";
 
 describe("Type conversion", () => {
     const bytes: ByteArray = new Uint8Array([
@@ -39,5 +44,45 @@ describe("Type conversion", () => {
 
     it("should convert Hex to Base64", () => {
         expect(hexToBase64(hex)).toStrictEqual(base64);
+    });
+});
+
+describe("Type operations", () => {
+    it("should concatenate byte arrays", () => {
+        const a: ByteArray = new Uint8Array([0, 1, 2]);
+        const b: ByteArray = new Uint8Array([3, 4]);
+
+        const c: ByteArray = concatBytes(a, b);
+
+        expect(c).toEqual(new Uint8Array([0, 1, 2, 3, 4]));
+    });
+});
+
+describe("Type checking", () => {
+    it("should verify number", () => {
+        expect(() => checkNumber(42)).not.toThrow(InvalidArgumentException);
+    });
+
+    it("should not verify number", () => {
+        expect(() => checkNumber("hello")).toThrow(InvalidArgumentException);
+    });
+
+    it("should verify positive integer", () => {
+        expect(() => checkPositiveInteger(42)).not.toThrow(InvalidArgumentException);
+    });
+
+    it("should not verify positive integer", () => {
+        expect(() => checkPositiveInteger(-1)).toThrow(InvalidArgumentException);
+    });
+
+    it("should verify ByteArray", () => {
+        expect(() => checkBytes(new Uint8Array([0, 1, 2]))).not.toThrow(InvalidArgumentException);
+        expect(() => checkBytes(new Uint8Array([]))).not.toThrow(InvalidArgumentException);
+    });
+
+    it("should not verify ByteArray", () => {
+        expect(() => checkBytes("deadbeef")).toThrow(InvalidArgumentException);
+        expect(() => checkBytes(null)).toThrow(InvalidArgumentException);
+        expect(() => checkBytes([])).toThrow(InvalidArgumentException);
     });
 });
