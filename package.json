@@ -26,7 +26,7 @@
     "homepage": "https://github.com/occult-app/crypto#readme",
     "dependencies": {
         "@noble/curves": "1.5.0",
-        "@noble/hashes": "1.4.0"
+        "@noble/hashes": "1.5.0"
     },
     "devDependencies": {
         "@commitlint/cli": "^19.3.0",
